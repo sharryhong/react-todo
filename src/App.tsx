@@ -1,7 +1,14 @@
 import React from "react";
+import ToDoList from "./pages/ToDoList";
+import GlobalStyle from "./styles/globalStyle";
 
 function App() {
-  return <div>ToDo</div>;
+  return (
+    <>
+      <GlobalStyle />
+      <ToDoList />
+    </>
+  );
 }
 
 export default App;
