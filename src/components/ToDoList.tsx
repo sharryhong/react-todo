@@ -1,11 +1,8 @@
 import React from "react";
-import { useForm } from "react-hook-form";
-import { useRecoilState } from "recoil";
+import { useRecoilValue } from "recoil";
 import { toDoAtom } from "../atoms";
-
-interface IForm {
-  toDo: string;
-}
+import CreateToDo from "./CreateToDo";
+import ToDo from "./ToDo";
 
 export interface IToDo {
   id: number;
@@ -14,25 +11,15 @@ export interface IToDo {
 }
 
 function ToDoList() {
-  const [toDos, setToDos] = useRecoilState(toDoAtom);
-  const { register, handleSubmit } = useForm<IForm>();
-  const onValid = ({ toDo }: IForm) => {
-    setToDos((oldToDos) => [
-      { id: Date.now(), text: toDo, category: "TODO" },
-      ...oldToDos,
-    ]);
-  };
+  const toDos = useRecoilValue(toDoAtom);
 
   return (
     <>
       <h1>To Do</h1>
-      <form onSubmit={handleSubmit(onValid)}>
-        <input {...register("toDo")} type="text" placeholder="write to do" />
-        <button>Add</button>
-      </form>
+      <CreateToDo />
       <ul>
         {toDos.map((todo) => (
-          <li key={todo.id}>{todo.text}</li>
+          <ToDo key={todo.id} {...todo} />
         ))}
       </ul>
     </>
