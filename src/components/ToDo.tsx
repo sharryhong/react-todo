@@ -1,5 +1,13 @@
 import { useSetRecoilState } from "recoil";
+import styled from "styled-components";
 import { toDoState, IToDo, Categories } from "../atoms";
+
+const Text = styled.span`
+  margin-right: 0.5em;
+`;
+const Button = styled.button`
+  margin-right: 0.5em;
+`;
 
 function ToDo({ text, category, id }: IToDo) {
   const setToDos = useSetRecoilState(toDoState);
@@ -16,15 +24,15 @@ function ToDo({ text, category, id }: IToDo) {
   };
   return (
     <li>
-      <span>{text}</span>
+      <Text>{text}</Text>
       {category !== Categories.TODO && (
-        <button onClick={() => onClick(Categories.TODO)}>To Do</button>
+        <Button onClick={() => onClick(Categories.TODO)}>To Do</Button>
       )}
       {category !== Categories.DOING && (
-        <button onClick={() => onClick(Categories.DOING)}>Doing</button>
+        <Button onClick={() => onClick(Categories.DOING)}>Doing</Button>
       )}
       {category !== Categories.DONE && (
-        <button onClick={() => onClick(Categories.DONE)}>Done</button>
+        <Button onClick={() => onClick(Categories.DONE)}>Done</Button>
       )}
     </li>
   );
