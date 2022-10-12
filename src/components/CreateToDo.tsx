@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useSetRecoilState, useRecoilValue } from "recoil";
 import styled from "styled-components";
@@ -16,6 +17,14 @@ interface IForm {
 
 function CreateToDo() {
   const setToDos = useSetRecoilState(toDoState);
+  useEffect(() => {
+    const todosLocal = localStorage.getItem("recoil-persist");
+    if (todosLocal) {
+      const { toDo } = JSON.parse(todosLocal);
+      setToDos(toDo);
+    }
+  }, [setToDos]);
+
   const category = useRecoilValue(categoryState);
   const { register, handleSubmit, setValue } = useForm<IForm>();
   const onValid = ({ toDo }: IForm) => {

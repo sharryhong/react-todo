@@ -46,14 +46,14 @@ function ToDoList() {
           <option value={Categories.DOING}>Doing</option>
           <option value={Categories.DONE}>Done</option>
         </select>
-        <form onSubmit={handleSubmit(onValid)}>
+        {/* <form onSubmit={handleSubmit(onValid)}>
           <input
             {...register("category", { required: true })}
             type="text"
             placeholder="category"
           />
           <button>Add</button>
-        </form>
+        </form> */}
       </Container>
 
       <CreateToDo />
