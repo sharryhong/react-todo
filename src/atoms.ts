@@ -2,6 +2,7 @@ import { atom, selector } from "recoil";
 
 export enum Categories {
   "TODO",
+  "DOING",
   "DONE",
 }
 
