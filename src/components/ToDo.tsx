@@ -2,11 +2,10 @@ import { useSetRecoilState } from "recoil";
 import styled from "styled-components";
 import { toDoState, IToDo, Categories } from "../atoms";
 
-const Text = styled.span`
-  margin-right: 0.5em;
-`;
-const Button = styled.button`
-  margin-right: 0.5em;
+const List = styled.li`
+  display: flex;
+  gap: 0.5em;
+  margin-bottom: 0.5em;
 `;
 
 function ToDo({ text, category, id }: IToDo) {
@@ -23,18 +22,18 @@ function ToDo({ text, category, id }: IToDo) {
     });
   };
   return (
-    <li>
-      <Text>{text}</Text>
+    <List>
+      <span>{text}</span>
       {category !== Categories.TODO && (
-        <Button onClick={() => onClick(Categories.TODO)}>To Do</Button>
+        <button onClick={() => onClick(Categories.TODO)}>To Do</button>
       )}
       {category !== Categories.DOING && (
-        <Button onClick={() => onClick(Categories.DOING)}>Doing</Button>
+        <button onClick={() => onClick(Categories.DOING)}>Doing</button>
       )}
       {category !== Categories.DONE && (
-        <Button onClick={() => onClick(Categories.DONE)}>Done</Button>
+        <button onClick={() => onClick(Categories.DONE)}>Done</button>
       )}
-    </li>
+    </List>
   );
 }
 

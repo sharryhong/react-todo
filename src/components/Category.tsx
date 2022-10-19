@@ -15,7 +15,7 @@ function Category() {
   const { register, handleSubmit, setValue } = useForm();
   const onValid = ({ category }: any) => {
     console.log(category);
-
+    // setCategory()
     setValue("category", "");
   };
   const onInput = (event: React.FormEvent<HTMLSelectElement>) => {
@@ -24,7 +24,7 @@ function Category() {
 
   return (
     <Container>
-      <strong>카테고리 : </strong>
+      <strong>Category : </strong>
       <select value={category} onInput={onInput}>
         <option value={Categories.TODO}>To Do</option>
         <option value={Categories.DOING}>Doing</option>
