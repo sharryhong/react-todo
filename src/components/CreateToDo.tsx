@@ -10,6 +10,17 @@ const Container = styled.div`
   gap: 0.5em;
   margin-bottom: 1rem;
 `;
+const Input = styled.input`
+  height: 2.5em;
+  padding: 0.5em 0.6em;
+  font-size: 1.2rem;
+  border-style: solid;
+`;
+const Button = styled.button`
+  height: 2.5em;
+  padding: 0.5em 0.6em;
+  font-size: 1.2rem;
+`;
 
 interface IForm {
   toDo: string;
@@ -25,7 +36,7 @@ function CreateToDo() {
     }
   }, [setToDos]);
 
-  const category = useRecoilValue(categoryState);
+  const category = useRecoilValue(categoryState)[0];
   const { register, handleSubmit, setValue } = useForm<IForm>();
   const onValid = ({ toDo }: IForm) => {
     setToDos((oldToDos) => [
@@ -37,14 +48,13 @@ function CreateToDo() {
 
   return (
     <Container>
-      <strong>To Do : </strong>
       <form onSubmit={handleSubmit(onValid)}>
-        <input
+        <Input
           {...register("toDo", { required: true })}
           type="text"
           placeholder="write to do"
         />
-        <button>Add</button>
+        <Button>Add</Button>
       </form>
     </Container>
   );

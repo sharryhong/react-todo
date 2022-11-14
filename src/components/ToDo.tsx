@@ -1,6 +1,6 @@
 import { useSetRecoilState } from "recoil";
 import styled from "styled-components";
-import { toDoState, IToDo, Categories } from "../atoms";
+import { toDoState, IToDo } from "../atoms";
 
 const List = styled.li`
   display: flex;
@@ -24,14 +24,14 @@ function ToDo({ text, category, id }: IToDo) {
   return (
     <List>
       <span>{text}</span>
-      {category !== Categories.TODO && (
-        <button onClick={() => onClick(Categories.TODO)}>To Do</button>
+      {category !== "TODO" && (
+        <button onClick={() => onClick("TODO")}>To Do</button>
       )}
-      {category !== Categories.DOING && (
-        <button onClick={() => onClick(Categories.DOING)}>Doing</button>
+      {category !== "DOING" && (
+        <button onClick={() => onClick("DOING")}>Doing</button>
       )}
-      {category !== Categories.DONE && (
-        <button onClick={() => onClick(Categories.DONE)}>Done</button>
+      {category !== "DONE" && (
+        <button onClick={() => onClick("DONE")}>Done</button>
       )}
     </List>
   );

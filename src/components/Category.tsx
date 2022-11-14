@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { useRecoilState } from "recoil";
 import { useForm } from "react-hook-form";
-import { Categories, categoryState } from "../atoms";
+import { categoryState } from "../atoms";
 
 const Container = styled.div`
   display: flex;
@@ -25,11 +25,11 @@ function Category() {
   return (
     <Container>
       <strong>Category : </strong>
-      <select value={category} onInput={onInput}>
+      {/* <select value={category} onInput={onInput}>
         <option value={Categories.TODO}>To Do</option>
         <option value={Categories.DOING}>Doing</option>
         <option value={Categories.DONE}>Done</option>
-      </select>
+      </select> */}
       <form onSubmit={handleSubmit(onValid)}>
         <input
           {...register("category", { required: true })}
