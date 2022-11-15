@@ -1,16 +1,26 @@
-import { useSetRecoilState } from "recoil";
+import React, { useState } from "react";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 import styled from "styled-components";
-import { toDoState, IToDo } from "../atoms";
+import { toDoState, IToDo, categoryState } from "../atoms";
 
 const List = styled.li`
   display: flex;
   gap: 0.5em;
-  margin-bottom: 0.5em;
+  margin-bottom: 1em;
 `;
 
 function ToDo({ text, category, id }: IToDo) {
+  const categories = useRecoilValue(categoryState);
+  const [selected, setSelected] = useState(category);
   const setToDos = useSetRecoilState(toDoState);
-  const onClick = (newCategory: IToDo["category"]) => {
+  const onChange = (event: React.FormEvent<HTMLSelectElement>) => {
+    const {
+      currentTarget: { value },
+    } = event;
+    setSelected(value);
+    changeToDos(value);
+  };
+  const changeToDos = (newCategory: string) => {
     setToDos((oldToDos) => {
       const index = oldToDos.findIndex((todo) => todo.id === id);
       const newToDo = { text, id, category: newCategory };
@@ -21,18 +31,17 @@ function ToDo({ text, category, id }: IToDo) {
       ];
     });
   };
+
   return (
     <List>
       <span>{text}</span>
-      {category !== "TODO" && (
-        <button onClick={() => onClick("TODO")}>To Do</button>
-      )}
-      {category !== "DOING" && (
-        <button onClick={() => onClick("DOING")}>Doing</button>
-      )}
-      {category !== "DONE" && (
-        <button onClick={() => onClick("DONE")}>Done</button>
-      )}
+      <select onChange={onChange} value={selected}>
+        {categories.map((item: string) => (
+          <option value={item} key={item}>
+            {item}
+          </option>
+        ))}
+      </select>
     </List>
   );
 }
