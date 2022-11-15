@@ -1,44 +1,38 @@
 import styled from "styled-components";
-import { useRecoilState } from "recoil";
+import { useSetRecoilState } from "recoil";
 import { useForm } from "react-hook-form";
 import { categoryState } from "../atoms";
 
-const Container = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 0.5em;
-  margin-bottom: 1rem;
+const Input = styled.input`
+  width: 15em;
+  height: 2.5em;
+  padding: 0.5em 0.6em;
+  border-style: solid;
+`;
+const Button = styled.button`
+  height: 2.5em;
+  padding: 0.5em 0.6em;
 `;
 
 function Category() {
-  const [category, setCategory] = useRecoilState(categoryState);
+  const setCategory = useSetRecoilState(categoryState);
   const { register, handleSubmit, setValue } = useForm();
   const onValid = ({ category }: any) => {
-    console.log(category);
-    // setCategory()
+    setCategory((oldCategory: string[]) => {
+      return [...oldCategory, category];
+    });
     setValue("category", "");
-  };
-  const onInput = (event: React.FormEvent<HTMLSelectElement>) => {
-    setCategory(event.currentTarget.value as any);
   };
 
   return (
-    <Container>
-      <strong>Category : </strong>
-      {/* <select value={category} onInput={onInput}>
-        <option value={Categories.TODO}>To Do</option>
-        <option value={Categories.DOING}>Doing</option>
-        <option value={Categories.DONE}>Done</option>
-      </select> */}
-      <form onSubmit={handleSubmit(onValid)}>
-        <input
-          {...register("category", { required: true })}
-          type="text"
-          placeholder="category"
-        />
-        <button>Add</button>
-      </form>
-    </Container>
+    <form onSubmit={handleSubmit(onValid)}>
+      <Input
+        {...register("category", { required: true })}
+        type="text"
+        placeholder="write category"
+      />
+      <Button>Add</Button>
+    </form>
   );
 }
 

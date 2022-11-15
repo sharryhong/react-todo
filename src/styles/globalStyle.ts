@@ -59,6 +59,9 @@ button {
   border-color: ${(props) => props.theme.accentColor};
 	border-style:none;
 }
+input {
+	outline: none;
+}
 * {
 	box-sizing: border-box;
 }

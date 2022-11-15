@@ -5,8 +5,10 @@ import { toDoState, IToDo, categoryState } from "../atoms";
 
 const List = styled.li`
   display: flex;
+  justify-content: space-between;
   gap: 0.5em;
-  margin-bottom: 1em;
+  align-items: center;
+  margin-bottom: 0.8em;
 `;
 
 function ToDo({ text, category, id }: IToDo) {

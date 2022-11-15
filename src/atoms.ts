@@ -18,6 +18,7 @@ export const toDoState = atom<IToDo[]>({
 export const categoryState = atom<string[]>({
   key: "category",
   default: ["TODO", "DOING", "DONE"],
+  effects_UNSTABLE: [persistAtom],
 });
 
 // 테스트

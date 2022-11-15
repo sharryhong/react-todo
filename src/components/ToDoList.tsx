@@ -14,22 +14,27 @@ const Wrap = styled.div`
 `;
 const Tabs = styled.div`
   width: 100%;
+  min-height: 9.5em;
   display: flex;
-  justify-content: space-around;
+  justify-content: flex-start;
   flex-wrap: wrap;
   margin: 1em 0;
   gap: 1.5em;
 `;
 const Tab = styled.div`
-  flex: 1 1 30%;
+  width: 31%;
+  border: 1px solid #ccc;
 `;
 const TabTitle = styled.strong`
   width: 100%;
   display: inline-block;
   text-align: center;
   margin-bottom: 0.7em;
-  padding-bottom: 0.5em;
-  border-bottom: 1px solid ${(props) => props.theme.accentColor};
+  padding: 0.5em 0.7em;
+  background-color: #eee;
+`;
+const List = styled.ul`
+  padding: 0.5em 0.7em;
 `;
 
 function ToDoList() {
@@ -42,18 +47,18 @@ function ToDoList() {
   return (
     <Wrap>
       <CreateToDo />
-      {/* <Category /> */}
       <Tabs>
         {categories.map((category) => (
           <Tab key={category}>
             <TabTitle>{category}</TabTitle>
-            <ul>
+            <List>
               {toDoCategory(category).map((todo) => (
                 <ToDo key={todo.id} {...todo} />
               ))}
-            </ul>
+            </List>
           </Tab>
         ))}
+        <Category />
       </Tabs>
     </Wrap>
   );
